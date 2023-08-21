@@ -4,6 +4,7 @@ import Search from "./Components/Search";
 import Beachvid from "../src/assets/video.mp4"
 import Categories from "./Components/Categories";
 import Trips from "./Components/Trips";
+import Footer from "./Components/Footer";
 
 function App() {
   return (
@@ -31,7 +32,10 @@ function App() {
         <h2 className="text-center text- text-3xl font-bold">Destinos mais procurados</h2>
       <Trips />
       </section>
+      <Footer />
     </div>
+
+  
   )
 }
 
