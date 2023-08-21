@@ -28,14 +28,14 @@ function Categories() {
   const categoriesToShow = categories.slice(0, 4);
 
   return (
+
     <ScrollContainer className="flex gap-6">
       {categoriesToShow &&
         categoriesToShow.map((category) => (
           <div
-            className="relative h-[200px] w-[250px]"
-            key={category.id}>
+            className="relative w-[130px] sm:w-[150px] md:w-[180px] lg:w-[220px] xl:w-[250px] h-auto">
             <img
-              className="rounded-lg object-cover"
+              className="rounded-lg object-cover w-full h-auto"
               src={category.coverImage}
               alt={category.name}
             />
@@ -45,6 +45,7 @@ function Categories() {
           </div>
         ))}
     </ScrollContainer>
+
   );
 }
 

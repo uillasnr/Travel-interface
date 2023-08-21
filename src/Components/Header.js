@@ -9,7 +9,7 @@ function Header() {
             </div>
 
             <div className=" flex items-center h-20 ">
-                <h3 className="text-white font-semibold text-lg">Minhas Viagens</h3>
+                <h3 className=" text-1xl text-white font-semibold text-lg ">Minhas Viagens</h3>
 
                 <div className="mx-10 flex items-center">
                     <BsPersonCircle size={40} className="mr-2 text-white" />
