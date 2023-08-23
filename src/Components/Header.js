@@ -1,13 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { BsPersonCircle } from 'react-icons/bs';
 
 function Header() {
     return (
         <header className=" flex items-center h-20 justify-between absolute  w-full z-10">
-            <div className="mx-10">
-                <h1 className="text-white text-4xl font-black">Travel</h1>
-            </div>
-
+            <Link to={'/'}>
+                <div className="mx-10">
+                    <h1 className="text-white text-4xl font-black">Travel</h1>
+                </div>
+            </Link>
             <div className=" flex items-center h-20 ">
                 <h3 className=" text-1xl text-white font-semibold text-lg ">Minhas Viagens</h3>
 
