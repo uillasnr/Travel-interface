@@ -40,3 +40,8 @@ module.exports = {
 /// <span className="text-gray-700 font-medium"
 /// <h3 className="text-slate-800 font-bold"
 //<p className="text-xs font-normal text-gray-600 text-center px-2 my-1
+
+
+
+
+
