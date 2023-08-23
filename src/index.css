@@ -15,3 +15,58 @@
     background: linear-gradient(180deg, transparent 0%, #ff0606 50%, #fd0000 50%);
     z-index: 1;
   }
+
+  
+
+  .react-datepicker__day--selected{
+    background-color: #590BD8 !important;
+  }
+  .react-datepicker__day:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected):hover{
+    transition: all .4s;
+    background-color: #BE72FA !important;
+    color: white;
+    border-radius: none;
+  }
+  .react-datepicker__day:not(.react-datepicker__day--disabled):not(.react-datepicker__day--selected){
+  @apply bg-purple-100
+  }
+  .react-datepicker__day--disabled{
+  @apply bg-gray-50 cursor-not-allowed
+  }
+  .react-datepicker__day--disabled:hover{
+  @apply bg-gray-50 cursor-not-allowed
+  }
+  .swiper-button-next:after,.swiper-button-prev:after{
+    color: #000;
+    font-size: 22px !important;
+    font-weight: bold;
+    position:absolute;
+   
+  }
+  .react-datepicker__header{
+    @apply bg-purple-200
+  }
+  .swiper-button-prev:after{
+    left: calc(32%)
+  }
+  .swiper-button-next:after{
+    left: calc(42%);
+  }
+  
+  .swiper-button-next,.swiper-button-prev{
+      width: 42px !important;
+      height: 42px !important;
+      background: rgba(255, 255, 255, 0.70);
+      border-radius: 50%;
+  }
+  .swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal{
+    bottom: 22px;
+  }
+  .swiper-pagination-bullet{
+  opacity: 0.6 !important;
+  background-color: #fff !important;
+  }
+  .swiper-pagination-bullet-active{
+  opacity: 1 !important;
+  background-color: #fff !important;
+  }
