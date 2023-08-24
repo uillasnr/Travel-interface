@@ -10,12 +10,12 @@ import TripLocation from "../Components/ComponentsDetails/TripLocation";
 
 function TripsDetails() {
     const [Header, setHeader] = useState({});
-    const [Highlights, setHighlights] = useState([]);
+    const [Highlihts, setHighlihts] = useState([]);
     const [Description, setDescription] = useState([])
     const [pricePerDay, setPricePerDay] = useState();
     const [location, setLocation] = useState()
     const { id } = useParams();
-
+console.log(Highlihts )
     useEffect(() => {
         async function loadTripDetails() {
             try {
@@ -24,7 +24,7 @@ function TripsDetails() {
                 console.log(data);
 
                 setHeader(data);
-                setHighlights(data.highlights);
+                setHighlihts(data.highlihts);
                 setDescription(data.description)
                 setPricePerDay(data.pricePerDay)
                 setLocation(data.location)
@@ -43,8 +43,8 @@ function TripsDetails() {
                 <TripsHeader Header={Header} />
             )}
 
-            {Highlights && (
-                <TripHighlights Highlights={Highlights} />
+            {Highlihts && (
+                <TripHighlights Highlights={Highlihts} />
             )}
 
             {Description && (
