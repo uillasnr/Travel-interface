@@ -1,6 +1,11 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from '@hookform/resolvers/yup';
+import api from "../services/api";
 import Modal from "react-modal";
 import Register from "./Register";
+import { useUser } from "../hooks/UserContext";
 
 const customStyles = {
     overlay: {
@@ -24,6 +29,32 @@ const customStyles = {
 
 function Login({ isOpen, onRequestClose }) {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const { login, userData} = useUser()
+
+
+    const schema = yup.object().shape({
+        email: yup.string().email('Digite um e-mail válido')
+            .required('O e-mail é obrigatório'),
+        password: yup.string().required('A senha e obrigatória')
+            .min(6, 'A senha deve ter pelo 6 digitos')
+    })
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm({
+        resolver: yupResolver(schema)
+    })
+
+    const onSubmit = async clientData => {
+        const {data} = await api.post("login", {
+            email: clientData.email,
+            password: clientData.password
+        })
+        console.log(data)
+        login(data)
+    }
 
     const openRegisterModal = () => {
         setIsRegisterModalOpen(true);
@@ -34,6 +65,7 @@ function Login({ isOpen, onRequestClose }) {
     };
 
     return (
+
         <Modal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
@@ -46,36 +78,47 @@ function Login({ isOpen, onRequestClose }) {
                 </button>
             </div>
             <h2 className="text-2xl font-bold text-gray-700 text-center mb-4">Faça Login</h2>
-            <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-1">
-                    Email:
-                </label>
-                <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 shadow-sm"
-                    placeholder="Seu email"
-                    required
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="password" className="block text-gray-700 text-sm font-medium mb-1">
-                    Senha:
-                </label>
-                <input
-                    type="password"
-                    id="password"
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 shadow-sm"
-                    placeholder="Sua senha"
-                    required
-                />
-            </div>
-            <button
-                type="button"
-                className="w-full bg-cyan-700 text-white py-2 rounded-lg hover:bg-cyan-700"
-            >
-                Entrar
-            </button>
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
+                <div className="mb-4">
+                    <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-1">
+                        Email:
+                    </label>
+                    <input
+                        type="email"
+                        id="email"
+                        {...register('email')}
+                        /*    onChange={handleEmailInputChange}  */
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 shadow-sm"
+                        placeholder="Seu email"
+                        required
+                    />
+                    <p className="errors">{errors.email?.message}</p>
+
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="password" className="block text-gray-700 text-sm font-medium mb-1">
+                        Senha:
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        {...register('password')}
+                        /*    onChange={handlePasswordInputChange} */
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 shadow-sm"
+                        placeholder="Sua senha"
+                        required
+                    />
+                    <p className="errors">{errors.password?.message}</p>
+
+                </div>
+                <button
+                    /*   type="button" */
+                    type="submit"
+                    className="w-full bg-cyan-700 text-white py-2 rounded-lg hover:bg-cyan-700"
+                >
+                    Entrar
+                </button>
+            </form>
             <div className="text-center mt-4">
                 <p className="text-gray-600">
                     Ainda não tem uma conta?{' '}
@@ -84,9 +127,10 @@ function Login({ isOpen, onRequestClose }) {
                     </span>
                 </p>
             </div>
-            
+
             <Register isOpen={isRegisterModalOpen} onRequestClose={closeRegisterModal} />
         </Modal>
+
     );
 }
 
