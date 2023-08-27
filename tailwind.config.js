@@ -35,7 +35,7 @@ module.exports = {
                                                                              //text-slate-800
 //cores de texto                                                             text-gray-600
 //H3 nome no card======= text-gray-700                                       text-gray-700
-//p location text-gray-600 
+//p location text-gray-600                                                    text-cyan-700 cores
 //P tamaunho da fonte text-xs 12rem
 /// <span className="text-gray-700 font-medium"
 /// <h3 className="text-slate-800 font-bold"
