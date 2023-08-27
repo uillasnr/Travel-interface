@@ -95,7 +95,9 @@ function MyTrips() {
                                             Total
                                         </p>
                                         <p className="text-sm font-semibold text-primaryDarker">
-                                            {`R$ ${Trip.totalPaid}`}
+                                            {`R$ ${parseFloat(Trip.totalPaid).toLocaleString('pt-BR', {
+                                                minimumFractionDigits: 2,
+                                            })}`}
                                         </p>
                                     </div>
                                     <button className='bg-cyan-700 w-full hover:bg-cyan-600 text-white cursor-pointer rounded-lg mt-4 h-10'

@@ -53,7 +53,7 @@ function Trips() {
 
                                 <p className="text-xs border-y-2 text-center text-slate-800">
                                     <span className="text-cyan-700 font-medium">por dia</span>
-                                    <h3 className="text-slate-800 font-bold">R${trip.pricePerDay.toString()}</h3>
+                                    <h3 className="text-slate-800 font-bold">R$ {trip.pricePerDay.toString()}</h3>
                                 </p>
                                 <p className="text-xs font-normal text-gray-600 text-center px-2 my-1">
                                     {LimitDescription(trip.description, 100)}</p>

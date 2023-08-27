@@ -9,12 +9,12 @@ registerLocale('pt-BR', ptBR)
 const DatePickerDete = forwardRef(({ className, error, errorMessage, ...props }, ref) => {
     const inputClassName = twMerge(
         className,
-        'rounded-lg border border-gray-300 bg-white p-2 text-sm font-normal text-dark placeholder-black placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary',
+        'rounded-lg border border-gray-300 bg-white p-2 text-center text-sm font-normal text-dark placeholder-black placeholder-opacity-20 outline-none transition-all focus:ring-1 focus:ring-primary',
         error ? 'border-red-500' : '',
     )
 
     return (
-        <div className="flex w-52 flex-col">
+        <div className="flex w-full flex-col">
             <DatePicker
                 locale="pt-BR"
                 wrapperClassName="w-full"
@@ -23,7 +23,7 @@ const DatePickerDete = forwardRef(({ className, error, errorMessage, ...props },
                 {...props}
             />
             {error && errorMessage && (
-                <div className="mt-1 text-xs text-red-500">{errorMessage}</div>
+                <div className="mt-1 text-xs text-center text-red-500">{errorMessage}</div>
             )}
         </div>
     )
