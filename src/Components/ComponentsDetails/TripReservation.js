@@ -3,13 +3,14 @@ import api from '../../services/api';
 import { Controller, useForm } from 'react-hook-form';
 import DatePicker from '../Datepicker';
 import { differenceInDays } from 'date-fns';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Input from '../Input';
 
 
 function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
   const [isLoading, setIsLoading] = useState(false);
   const [reservationData, setReservationData] = useState(null);
+  const history = useHistory()
   const { id } = useParams();
 
 
@@ -45,20 +46,39 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
         guests,
         pricePerDay,
         totalPaid,
-
       });
 
       // Se a reserva for criada com sucesso, atualize os dados da reserva
       const { reservation } = response.data;
       setReservationData(reservation);
-
+console.log(response)
       setIsLoading(false);
+
+    // Redirect the user to the Confirmation page with the reservation ID
+    history.push(`/Confirmation/${reservation.id}`);
+
+
     } catch (error) {
       console.error('Erro ao criar reserva:', error);
       setIsLoading(false);
+
       // Trate os erros e exiba mensagens de erro para o usuário, se necessário
+      if (error.response && error.response.status === 400) {
+        // Se a API retornar um erro 400, as datas não estão disponíveis
+        setError('startDate', {
+          type: 'manual',
+          message: 'As datas selecionadas não estão disponíveis para reserva.',
+        });
+        setError('endDate', {
+          type: 'manual',
+          message: 'As datas selecionadas não estão disponíveis para reserva.',
+        });
+      }
     }
   };
+
+
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -126,7 +146,7 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
         </div>
 
         {/* Número de hóspedes é obrigatório */}
-        <input
+        <Input
           className="bg-slate-200 text-black"
           {...register('guests', {
             required: {
