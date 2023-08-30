@@ -3,14 +3,15 @@ import api from '../../services/api';
 import { Controller, useForm } from 'react-hook-form';
 import DatePicker from '../Datepicker';
 import { differenceInDays } from 'date-fns';
-import { useParams, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Input from '../Input';
+import Confirmation from './Confirmation';
 
 
 function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
+  const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reservationData, setReservationData] = useState(null);
-  const history = useHistory()
   const { id } = useParams();
 
 
@@ -28,6 +29,8 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
   const date = new Date();
   const difference = differenceInDays(new Date(endDateValue), new Date(startDateValue));
 
+
+
   const onSubmit = async (formData) => {
     try {
       setIsLoading(true);
@@ -38,7 +41,7 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
       const difference = differenceInDays(new Date(endDate), new Date(startDate));
       const totalPaid = difference * pricePerDay;
 
-      // Enviar solicitação para criar a reserva
+
       const response = await api.post(`/TripReservation`, {
         tripId: id,
         startDate,
@@ -51,12 +54,11 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
       // Se a reserva for criada com sucesso, atualize os dados da reserva
       const { reservation } = response.data;
       setReservationData(reservation);
-console.log(response)
+ console.log(response)
       setIsLoading(false);
 
-    // Redirect the user to the Confirmation page with the reservation ID
-    history.push(`/Confirmation/${reservation.id}`);
-
+      // modal Confirmation
+      setIsReservationModalOpen(true);
 
     } catch (error) {
       console.error('Erro ao criar reserva:', error);
@@ -64,7 +66,7 @@ console.log(response)
 
       // Trate os erros e exiba mensagens de erro para o usuário, se necessário
       if (error.response && error.response.status === 400) {
-        // Se a API retornar um erro 400, as datas não estão disponíveis
+
         setError('startDate', {
           type: 'manual',
           message: 'As datas selecionadas não estão disponíveis para reserva.',
@@ -196,6 +198,14 @@ console.log(response)
         >
           Reservar agora
         </button>
+
+        {isReservationModalOpen && (
+          <Confirmation
+            isOpen={isReservationModalOpen}
+            onRequestClose={() => setIsReservationModalOpen(false)}
+          />
+        )}
+
       </div>
     </form>
   );
