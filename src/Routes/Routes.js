@@ -6,7 +6,8 @@ import Home from "../Containers/Home";
 import TripsDetails from "../Containers/TripsDetails";
 import MyTrips from "../Containers/my-trips";
 
-
+//import PrivateRoute from './private-route' //todas estas rotas são privadas
+import Confirmation from "../Components/ComponentsDetails/Confirmation";
 
 function Routes() {
     return (
@@ -15,6 +16,8 @@ function Routes() {
                 <Route exact component={Home} path="/" />
                 <Route exact component={TripsDetails} path="/detalhes/:id" />
                 <Route exact component={MyTrips} path="/Viagens" />
+
+              {/*   <Route exact component={Confirmation} path="/Confirmation" /> */}
             </Switch>
         </Router>
     )
