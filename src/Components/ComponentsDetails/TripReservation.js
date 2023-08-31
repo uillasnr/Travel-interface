@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { Controller, useForm } from 'react-hook-form';
 import DatePicker from '../Datepicker';
@@ -6,12 +6,16 @@ import { differenceInDays } from 'date-fns';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Input from '../Input';
 import Confirmation from './Confirmation';
-
+import { useUser } from "../../hooks/UserContext";
+import Login from '../../Containers/Login';
 
 function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
+  const [LoginModalOpen, setLoginModalOpen] = useState(false)
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [reservationData, setReservationData] = useState(null);
+  const { user } = useUser()
   const { id } = useParams();
 
 
@@ -24,12 +28,23 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
     formState: { errors },
   } = useForm();
 
+  // Obtenha os valores dos campos de data de início e data de término
   const startDateValue = watch('startDate');
   const endDateValue = watch('endDate');
   const date = new Date();
+
+  // Cálculo da diferença em dias entre as datas de início e término
   const difference = differenceInDays(new Date(endDateValue), new Date(startDateValue));
 
-
+  // alterações no estado do usuário e atualizar o estado de login
+  useEffect(() => {
+    if (user) {
+      setIsUserLoggedIn(true);
+      setLoginModalOpen(false); // Feche o modal de login
+    } else {
+      setIsUserLoggedIn(false);
+    }
+  }, [user]);
 
   const onSubmit = async (formData) => {
     try {
@@ -37,10 +52,16 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
 
       const { startDate, endDate, guests } = formData;
 
+      // Verifique se o usuário está logado antes de prosseguir
+      if (!user) {
+        setIsLoading(false);
+        setLoginModalOpen(true)
+        return;
+      }
+
       // Calcular o valor total da reserva
       const difference = differenceInDays(new Date(endDate), new Date(startDate));
       const totalPaid = difference * pricePerDay;
-
 
       const response = await api.post(`/TripReservation`, {
         tripId: id,
@@ -57,14 +78,14 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
  console.log(response)
       setIsLoading(false);
 
-      // modal Confirmation
+      // Abra o modal de confirmação
       setIsReservationModalOpen(true);
 
     } catch (error) {
       console.error('Erro ao criar reserva:', error);
       setIsLoading(false);
 
-      // Trate os erros e exiba mensagens de erro para o usuário, se necessário
+      // exiba mensagens de erro para o usuário, se necessário
       if (error.response && error.response.status === 400) {
 
         setError('startDate', {
@@ -205,7 +226,13 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
             onRequestClose={() => setIsReservationModalOpen(false)}
           />
         )}
-
+        {LoginModalOpen && (
+          <Login
+            isOpen={LoginModalOpen}
+            onRequestClose={() => setLoginModalOpen(false)}
+            errorMessage="Faça login para realizar a reserva."
+          />
+        )}
       </div>
     </form>
   );
