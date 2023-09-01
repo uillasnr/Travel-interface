@@ -23,7 +23,7 @@ const customStyles = {
         borderRadius: "8px",
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
         maxWidth: "400px",
-        width: "90%", // Reduzido o tamanho para telas menores
+        width: "90%", 
         padding: "20px",
         background: "white",
     },
@@ -61,7 +61,7 @@ function Login({ isOpen, onRequestClose, errorMessage }) {
 
 
         } catch (error) {
-            // If login fails, set the error message
+           
             setError("Usuário não encontrado");
         }
     }

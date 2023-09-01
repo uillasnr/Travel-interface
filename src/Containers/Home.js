@@ -32,7 +32,7 @@ function Home() {
 
       </section>
       <div className="absolute bottom-0 top-3/4 left-1/2 transform -translate-x-1/2">
-       {/*    <Categories />   */}
+         <Categories />   
       </div>
 
       <section>
