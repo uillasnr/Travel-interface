@@ -4,17 +4,12 @@ import { BsPersonCircle } from 'react-icons/bs';
 import Login from "../Containers/Login";
 import { useUser } from "../hooks/UserContext"
 
-
-
 function Header() {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const { user, logout } = useUser();
 
-
-    /*   console.log(user); */ // Isso irá imprimir o 'id' no console
-
     const handleLogout = () => {
-        logout(); 
+        logout();
     };
 
     const openLoginModal = () => {
@@ -28,11 +23,11 @@ function Header() {
     return (
         <header className="flex items-center h-20 justify-between absolute w-full z-10">
             <Link to={'/'}>
-                <div className="mx-4 md:mx-10"> {/* Reduz a margem nas telas menores */}
-                    <h1 className="text-white text-2xl md:text-4xl font-black">Travel</h1> {/* Aumenta o tamanho do texto nas telas maiores */}
+                <div className="mx-4 md:mx-10">
+                    <h1 className="text-white text-2xl md:text-4xl font-black">Travel</h1>
                 </div>
             </Link>
-            <div className="  flex items-center h-20 "> {/* Esconde o conteúdo nas telas menores */}
+            <div className="flex items-center h-20">
                 <Link to={`/Viagens`} style={{ textDecoration: 'none' }}>
                     <h3 className="text-1xl text-white font-semibold text-lg">Minhas Viagens</h3>
                 </Link>
@@ -41,11 +36,13 @@ function Header() {
                     {user ? (
                         <div>
                             <p className="text-white text-xs">Olá {user.user.name}</p>
-                            <p className="text-xs text-red-800 cursor-pointer font-black"
-                                onClick={handleLogout} 
-                            > Sair</p>
+                            <p
+                                className="text-xs text-red-800 cursor-pointer font-black"
+                                onClick={handleLogout}
+                            >
+                                Sair
+                            </p>
                         </div>
-
                     ) : (
                         <div>
                             <p
@@ -56,18 +53,17 @@ function Header() {
                             </p>
                             <p
                                 className="text-white text-xs cursor-pointer"
-                            /*   onClick={openRegisterModal} */
                             >
                                 cadastre-se
                             </p>
                         </div>
                     )}
                 </div>
-
-
             </div>
 
-            <Login isOpen={isLoginModalOpen} onRequestClose={closeLoginModal} />
+            {!user && (
+                <Login isOpen={isLoginModalOpen} onRequestClose={closeLoginModal} />
+            )}
         </header>
     );
 }
