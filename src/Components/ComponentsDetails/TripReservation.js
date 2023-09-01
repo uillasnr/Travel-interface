@@ -8,6 +8,7 @@ import Input from '../Input';
 import Confirmation from './Confirmation';
 import { useUser } from "../../hooks/UserContext";
 import Login from '../../Containers/Login';
+import Button from '../Button';
 
 function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
@@ -75,7 +76,7 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
       // Se a reserva for criada com sucesso, atualize os dados da reserva
       const { reservation } = response.data;
       setReservationData(reservation);
- console.log(response)
+      console.log(response)
       setIsLoading(false);
 
       // Abra o modal de confirmação
@@ -211,14 +212,13 @@ function TripReservation({ pricePerDay, startDate, endDate, maxGuests }) {
       </div>
 
       <div className="border-b pb-10 lg:border-none">
-        <button
-          className="bg-cyan-700 w-full hover:bg-cyan-600 text-white cursor-pointer rounded-lg mt-4 h-10"
+        <Button
           disabled={isLoading}
           variant="primary"
           type="submit"
         >
           Reservar agora
-        </button>
+        </Button>
 
         {isReservationModalOpen && (
           <Confirmation

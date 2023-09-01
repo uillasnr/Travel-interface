@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import Button from '../Button';
 const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const containerStyle = {
@@ -53,10 +54,10 @@ function MyComponent({ location }) {
                     </GoogleMap>
                 </LoadScript>
             )}
-            <button className='bg-cyan-700 hover:bg-cyan-600 text-white cursor-pointer rounded-lg mt-4 h-10'
+            <Button className=' mt-4 '
                 onClick={handleOpenGoogleMaps} variant="outlined">
                 Ver no Google Maps
-            </button>
+            </Button>
         </div>
     );
 }
