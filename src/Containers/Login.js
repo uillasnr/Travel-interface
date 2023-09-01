@@ -6,6 +6,8 @@ import api from "../services/api";
 import Modal from "react-modal";
 import Register from "./Register";
 import { useUser } from "../hooks/UserContext";
+import Button from "../Components/Button";
+
 
 const customStyles = {
     overlay: {
@@ -27,9 +29,10 @@ const customStyles = {
     },
 };
 
-function Login({ isOpen, onRequestClose }) {
+function Login({ isOpen, onRequestClose, errorMessage }) {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-    const { login, userData} = useUser()
+    const { login } = useUser()
+    const [error, setError] = useState("");
 
 
     const schema = yup.object().shape({
@@ -48,12 +51,19 @@ function Login({ isOpen, onRequestClose }) {
     })
 
     const onSubmit = async clientData => {
-        const {data} = await api.post("login", {
-            email: clientData.email,
-            password: clientData.password
-        })
-        console.log(data)
-        login(data)
+        try {
+            const { data } = await api.post("login", {
+                email: clientData.email,
+                password: clientData.password
+            });
+            console.log(data);
+            login(data);
+
+
+        } catch (error) {
+            // If login fails, set the error message
+            setError("Usuário não encontrado");
+        }
     }
 
     const openRegisterModal = () => {
@@ -63,6 +73,7 @@ function Login({ isOpen, onRequestClose }) {
     const closeRegisterModal = () => {
         setIsRegisterModalOpen(false);
     };
+
 
     return (
 
@@ -78,6 +89,8 @@ function Login({ isOpen, onRequestClose }) {
                 </button>
             </div>
             <h2 className="text-2xl font-bold text-gray-700 text-center mb-4">Faça Login</h2>
+            <span className="flex mt-1 justify-center text-xs text-center text-red-500">{error}</span>
+            <span className="flex mt-1 justify-center text-xs text-center text-red-500">{errorMessage}</span>
             <form noValidate onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-4">
                     <label htmlFor="email" className="block text-gray-700 text-sm font-medium mb-1">
@@ -111,13 +124,12 @@ function Login({ isOpen, onRequestClose }) {
                     <p className="errors">{errors.password?.message}</p>
 
                 </div>
-                <button
-                    /*   type="button" */
+                <Button 
                     type="submit"
-                    className="w-full bg-cyan-700 text-white py-2 rounded-lg hover:bg-cyan-700"
+                   /*  className="w-full bg-cyan-700 text-white py-2 rounded-lg hover:bg-cyan-700"  */
                 >
                     Entrar
-                </button>
+                </Button>
             </form>
             <div className="text-center mt-4">
                 <p className="text-gray-600">
