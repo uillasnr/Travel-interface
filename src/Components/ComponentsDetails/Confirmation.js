@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import Modal from "react-modal";
 import ReactCountryFlag from "react-country-flag";
-import { useHistory } from "react-router-dom";
 import Button from "../Button";
+import { loadStripe } from '@stripe/stripe-js';
 
+
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY, {
+  apiVersion: '2023-08-16',
+});
 
 
 const customStyles = {
@@ -29,7 +34,7 @@ const customStyles = {
 
 function Confirmation({ isOpen, onRequestClose }) {
   const [confirmationData, setConfirmationData] = useState(null);
-  const history = useHistory();
+
 
   useEffect(() => {
     async function loadConfirmation() {
@@ -53,21 +58,27 @@ function Confirmation({ isOpen, onRequestClose }) {
   // criar a reserva
   const handleFinalizeReservation = async () => {
     try {
-      const response = await api.post("/Reservation", {
+      const stripe = await stripePromise;
+      const response = await api.post(`/Payment`, {
+
         tripId: confirmationData.trip.id,
         startDate: confirmationData.startDate,
         endDate: confirmationData.endDate,
         guests: confirmationData.guests,
         totalPaid: confirmationData.totalPaid,
       });
-
+  
       const { data } = response;
-      console.log(data);
-
-      history.push("/");
-
-      // Você também pode exibir uma mensagem de sucesso usando algum estado no componente, se desejar.
-
+  console.log(data);
+      // Crie uma sessão de pagamento no Stripe
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: data.session, // ID da sessão do Stripe retornado pelo seu backend
+      });
+  
+      if (error) {
+        console.error("Erro ao redirecionar para o pagamento:", error);
+        // Lide com o erro, exiba uma mensagem de erro para o usuário, etc.
+      }
     } catch (error) {
       console.error("Erro ao finalizar a reserva", error);
       // Lide com o erro, exiba uma mensagem de erro para o usuário, etc.
