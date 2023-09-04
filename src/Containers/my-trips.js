@@ -44,17 +44,19 @@ function MyTrips() {
 
     return (
         <div className="p-8">
-            <h1 className="text-2xl font-extrabold text-gray-700 text-center">
+            <h1 className="text-2xl font-extrabold mb-10 text-gray-700 text-center">
                 Minhas Reservas
             </h1>
-            <Link className="w-max transition-all hover:scale-110" to={"/"}>
-                <FiArrowLeftCircle size={30} />
-            </Link>
-            <div className="grid grid-cols-1 px-5 py-10 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2   xl:grid-cols-3 gap-12 border-gray-400">
+            <div className="mb-5">
+                <Link className=" transition-all hover:scale-110" to={"/"}>
+                    <FiArrowLeftCircle size={30} />
+                </Link>
+            </div>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 border-gray-400">
                 {myTrips.length > 0 ? (
                     myTrips.map((Trip) => (
-                        <div key={Trip.id} className="flex flex-1 items-center flex-col gap-5">
-                            <div className="rounded-xl border border-[#BBBFBF] bg-slate-500 p-5 w-[400px] ">
+                        <div key={Trip.id} className="flex flex-1 items-center flex-col gap-5 ">
+                            <div className="rounded-xl border border-[#BBBFBF] bg-white p-5 w-3/4 sm:w-80 md:w-72 lg:w-96 xl:w-96 2xl:w-3/4">
 
                                 <div className="flex flex-wrap items-center gap-7 border-b border-b-[#BBBFBF] pb-5 justify-center xl:flex-nowrap">
                                     <img
@@ -81,44 +83,42 @@ function MyTrips() {
                                     </div>
                                 </div>
                                 <div className="mt-5 text-center ">
-                                    <h3 className="mb-[12px] text-sm font-semibold  text-gray-900">
+                                    <h3 className="mb-2 text-sm font-semibold text-gray-900">
                                         Sobre a Viagem
                                     </h3>
                                 </div>
 
-                                <div className="flex  gap-16 border-b border-b-[#BBBFBF] justify-around pb-5">
-
-                                    <div className="">
-                                        <p className="text-sm font-normal text-center leading-relaxed text-primaryDarker">
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-16 border-b border-b-[#BBBFBF] pb-5 md:gap-1">
+                                    <div className="flex-1 text-center">
+                                        <p className="text-sm font-semibold leading-relaxed  text-gray-900">
                                             Data
                                         </p>
-                                        <span className="text-sm font-normal flex flex-col leading-relaxed text-primaryDarker">
+                                        <span className="text-sm font-normal leading-relaxed  text-gray-600 ">
                                             {`${new Date(Trip.startDate).toLocaleDateString()} - ${new Date(
                                                 Trip.endDate
                                             ).toLocaleDateString()}`}
                                         </span>
                                     </div>
 
-                                    <div>
-                                        <p className="text-sm font-normal text-center leading-relaxed text-primaryDarker">
+                                    <div className="flex-1 text-center mt-2 sm:mt-0">
+                                        <p className="text-sm font-semibold leading-relaxed  text-gray-900">
                                             Hóspedes
                                         </p>
-                                        <span className="text-sm font-normal leading-relaxed text-primaryDarker">
-                                            {Trip.guests === 1
-                                                ? "1 hóspede"
-                                                : `${Trip.guests} hóspedes`}
+                                        <span className="text-sm font-normal leading-relaxed text-gray-600">
+                                            {Trip.guests === 1 ? "1 hóspede" : `${Trip.guests} hóspedes`}
                                         </span>
                                     </div>
                                 </div>
+
                                 <div className="mt-5">
-                                    <h3 className="mb-[12px] text-sm text-center font-semibold text-primaryDarker">
+                                    <h3 className="mb-[12px] text-sm text-center font-semibold text-gray-900">
                                         Informações do pagamento
                                     </h3>
                                     <div className="mb-7 flex justify-between">
-                                        <p className="text-sm font-medium text-primaryDarker">
+                                        <p className="text-sm font-semibold text-gray-900">
                                             Total
                                         </p>
-                                        <p className="text-sm font-semibold text-primaryDarker">
+                                        <p className="text-sm font-semibold text-gray-900">
                                             {`R$ ${parseFloat(Trip.totalPaid).toLocaleString(
                                                 "pt-BR",
                                                 {
@@ -141,7 +141,8 @@ function MyTrips() {
                         </div>
                     ))
                 ) : (
-                    <p>Nenhuma viagem encontrada.</p>
+                    <p className="text-gray-700  font-medium text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        Você ainda não tem nenhuma reserva!</p>
                 )}
             </div>
 

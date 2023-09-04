@@ -22,7 +22,7 @@ import paths from "./Paths";
 function NewTrips() {
   return (
 
-    <Card className="h-[100vh] bg-slate-400 w-full max-w-[20rem] text-white p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card className="h-[100vh] drop-shadow-2xl bg-slate-500 w-full max-w-[20rem] text-white p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="white">
           <div className="font-extrabold mb-14 text-center text-4xl">
@@ -35,8 +35,8 @@ function NewTrips() {
           <ListItemPrefix>
             <PresentationChartBarIcon className="h-5 w-5 my-4" />
           </ListItemPrefix>
-          <Link className="w-max transition-all " to={"/reservas"}>
-            Dashboard
+          <Link className="w-max transition-all " to={paths.Reservations}>
+            Todas as reservas
           </Link>
         </ListItem >
         <ListItem className="gap-3">
@@ -44,7 +44,7 @@ function NewTrips() {
             <ShoppingBagIcon className="h-5 w-5 my-4" />
           </ListItemPrefix>
           <Link className="w-max transition-all " to={paths.CreateTrips}>
-            E-Commerce
+            Criar viagem
           </Link>
         </ListItem >
         <ListItem className="gap-3">
