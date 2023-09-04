@@ -2,16 +2,16 @@ import React from "react";
 import Sidebar from "../../Containers/Admin/Sidebar"
 import Reservations from "./Reservations";
 import CreateTrips from "./CreateTrips";
+import paths from "./Paths";
 
 
-function index({props}) {
+function index({ match: { path } }) {
 
-console.log(props)
     return (
         <div className="flex ">
             <Sidebar />
-            <Reservations />
-            <CreateTrips />
+            {path === paths.Reservations && <Reservations />}
+            {path === paths.CreateTrips && <CreateTrips />}
         </div>
     );
 }

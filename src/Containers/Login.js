@@ -101,7 +101,7 @@ function Login({ isOpen, onRequestClose, errorMessage }) {
                         id="email"
                         {...register('email')}
                         /*    onChange={handleEmailInputChange}  */
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 shadow-sm"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-cyan-700 shadow-sm"
                         placeholder="Seu email"
                         required
                     />
@@ -117,7 +117,7 @@ function Login({ isOpen, onRequestClose, errorMessage }) {
                         id="password"
                         {...register('password')}
                         /*    onChange={handlePasswordInputChange} */
-                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 shadow-sm"
+                        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-cyan-700 shadow-sm"
                         placeholder="Sua senha"
                         required
                     />
