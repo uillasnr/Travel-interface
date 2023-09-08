@@ -5,13 +5,36 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
+import Highlihts from "./Highlihts";
+
+
 
 function CreateTrip() {
     const [coverImage, setCoverImage] = useState(null);
-
-    const handleCoverImageChange = (image) => {
-        setCoverImage(image);
+    const [imagesUrl, setImagesUrl] = useState([]); 
+    const [selectedHighlights, setSelectedHighlights] = useState([]);
+ //console.log(setImageUrls)
+ console.log(imagesUrl);
+    const handleCoverImageChange = (imageCover) => {
+        setCoverImage(imageCover);
     };
+
+
+    const handleImageChange = (index, imageFile) => {
+        if (imageFile) {
+            // Create a copy of the current state
+            const updatedImagesUrl = [...imagesUrl];
+            // Replace the image file at the specific index
+            updatedImagesUrl[index] = imageFile;
+            // Update the state with the new array of image files
+            setImagesUrl(updatedImagesUrl);
+        }
+    };
+    
+    
+    
+
+
 
     const schema = yup.object().shape({
         name: yup.string().required("O nome é obrigatório"),
@@ -21,20 +44,21 @@ function CreateTrip() {
         location: yup.string().required("A localização é obrigatória"),
         countryCode: yup.string().required("O código do país é obrigatório"),
         pricePerDay: yup.number().required("O preço por dia é obrigatório"),
-        highlihts: yup.string().required("Os destaques são obrigatórios"),
+        //highlihts: yup.string().required("Os destaques são obrigatórios"),
         maxGuests: yup.number().required("O número máximo de hóspedes é obrigatório"),
         recommended: yup.boolean(),
     });
-
-
 
     const { register, handleSubmit, formState: { errors }, } = useForm({
         resolver: yupResolver(schema),
     });
 
+    // Enviando novo produto para o back-end
     const onSubmit = async (data) => {
+        const highlihtsString = JSON.stringify(selectedHighlights);
         try {
             const formData = new FormData();
+
             formData.append("name", data.name);
             formData.append("description", data.description);
             formData.append("startDate", data.startDate);
@@ -42,21 +66,43 @@ function CreateTrip() {
             formData.append("location", data.location);
             formData.append("countryCode", data.countryCode);
             formData.append("pricePerDay", data.pricePerDay);
-            formData.append("highlihts", data.highlihts);
+            formData.append("highlihts", highlihtsString); 
             formData.append("maxGuests", data.maxGuests);
             formData.append("recommended", data.recommended);
             formData.append("coverImage", coverImage);
 
-            // Enviar o formulário para a API
-            const response = await api.post("trips", formData);
-            console.log("Resposta da API:", response.data);
+          
+            // Adicione as imagens ao formData
+imagesUrl.forEach((imageFile, index) => {
+    formData.append(`imagesUrl_${index}`, imageFile);
+  
+});
 
-            // Redirecionar ou fazer outras ações após o envio bem-sucedido
+
+
+            
+              
+
+
+
+
+            // Enviar o formulário para a API
+            const response = await api.post("/Trips-criar", formData);
+            console.log(response);
         } catch (error) {
-            // Lidar com erros de envio para a API, se necessário
-            console.error("Erro ao enviar o formulário para a API:", error);
+            console.error("Erro na chamada da API:", error);
         }
+
     };
+
+    const handleHighlightsClick = (selectedImages) => {
+        setSelectedHighlights(selectedImages);
+    };
+
+
+
+
+
 
     return (
         <div className="bg-gray-200 min-h-screen w-full flex items-center justify-center">
@@ -178,11 +224,11 @@ function CreateTrip() {
                     </div>
 
 
-                    <div className="mb-4">
+                    {/*     <div className="mb-4">
                         <label htmlFor="highlihts" className="block text-gray-800 font-semibold mb-2">
                             Destaques (separados por vírgula):
                         </label>
-                        <input
+                        < input
                             type="text"
                             id=" highlihts"
                             name="highlihts"
@@ -190,8 +236,18 @@ function CreateTrip() {
                             className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
                             required
                         />
+
                         <p className="errors">{errors.highlihts?.message}</p>
-                    </div>
+                    </div>   
+
+
+                    <SelectComponent onSelectionChange={handleHighlightsChange}
+
+                    /> */}
+
+
+
+
 
                     <div className="mb-4">
                         <label htmlFor="recommended" className="block text-gray-800 font-semibold mb-2">
@@ -206,6 +262,8 @@ function CreateTrip() {
                         />
                         <p className="errors">{errors.recommended?.message}</p>
                     </div>
+
+
 
                     <div className="mb-4">
                         <label
@@ -234,14 +292,36 @@ function CreateTrip() {
                     </div>
                 </form>
             </div>
-            <div className="w-1/2 pl-4 mt-[-405px]">
-                <h3 className="font-semibold text-center mb-2">Imagem de Capa</h3>
-                <InputFileCover onImageChange={handleCoverImageChange} />
+
+            <div className="w-1/2 pl-4 mt-[-85px]">
+
+                <InputFileCover onImageCoverChange={handleCoverImageChange} />
+
                 <div className="flex gap-3 mt-3">
-                    <InputFile />
-                    <InputFile />
-                    <InputFile />
+                    <InputFile index={0} onImageChange={handleImageChange} />
+                    <InputFile index={1} onImageChange={handleImageChange} />
+                    <InputFile index={2} onImageChange={handleImageChange} />
                 </div>
+
+                <label htmlFor="highlihts" className="block text-gray-800 font-bold text-center my-2">
+                    O que esse lugar oferece
+                </label>
+
+                <div className="mt-3 p-3.5 bg-opacity-80 bg-slate-500  rounded-lg shadow-lg " >
+                    <div className="overflow-auto max-h-[225px] gap-3">
+                        <div>
+                            <Highlihts
+                                name="highlights"
+                                {...register("highlights")}
+                                required
+                                onImageHighlihtsClick={handleHighlightsClick} />
+
+
+                            <p className="errors">{errors.highlihts?.message}</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );
