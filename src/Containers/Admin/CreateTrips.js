@@ -6,6 +6,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import Highlihts from "./Highlihts";
+import { useHistory } from "react-router-dom";
+import paths from "./Paths";
 
 
 
@@ -13,7 +15,7 @@ function CreateTrip() {
     const [coverImage, setCoverImage] = useState(null);
     const [imageFiles, setImageFiles] = useState([null, null, null]);
     const [selectedHighlights, setSelectedHighlights] = useState([]);
-
+    const history = useHistory()
 
     const handleCoverImageChange = (imageCover) => {
         setCoverImage(imageCover);
@@ -24,14 +26,14 @@ function CreateTrip() {
         const updatedImageFiles = [...imageFiles];
         updatedImageFiles[index] = imageFile;
         setImageFiles(updatedImageFiles);
-      };
+    };
 
 
-      const handleHighlightsClick = (selectedImages) => {
+    const handleHighlightsClick = (selectedImages) => {
         setSelectedHighlights(selectedImages);
     };
-      
-   
+
+
     const schema = yup.object().shape({
         name: yup.string().required("O nome é obrigatório"),
         description: yup.string().required("A descrição é obrigatória"),
@@ -40,7 +42,7 @@ function CreateTrip() {
         location: yup.string().required("A localização é obrigatória"),
         countryCode: yup.string().required("O código do país é obrigatório"),
         pricePerDay: yup.number().required("O preço por dia é obrigatório"),
-       // highlihts: yup.string().required("Os destaques são obrigatórios"),
+        // highlihts: yup.string().required("Os destaques são obrigatórios"),
         maxGuests: yup.number().required("O número máximo de hóspedes é obrigatório"),
         recommended: yup.boolean(),
     });
@@ -69,25 +71,27 @@ function CreateTrip() {
 
             const imageUrls = imageFiles.map((imageFile) => {
                 if (imageFile) {
-                  formData.append("imagesUrl", imageFile);
-                  return URL.createObjectURL(imageFile);
+                    formData.append("imagesUrl", imageFile);
+                    return URL.createObjectURL(imageFile);
                 }
                 return null;
-              });
-          
-              formData.append("imagesUrl", JSON.stringify(imageUrls.filter((url) => url !== null)));
+            });
+
+            formData.append("imagesUrl", JSON.stringify(imageUrls.filter((url) => url !== null)));
 
 
             // Enviar o formulário para a API
             const response = await api.post("/Trips-criar", formData);
             console.log(response);
+            // Redirecionar para a tela de listagem de viagens após o sucesso
+            history.push(paths.AllTrips);
         } catch (error) {
             console.error("Erro na chamada da API:", error);
         }
 
     };
 
-  
+
 
 
     return (
