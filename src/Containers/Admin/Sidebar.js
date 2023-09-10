@@ -22,7 +22,7 @@ import paths from "./Paths";
 function NewTrips() {
   return (
 
-    <Card className="h-[100vh] drop-shadow-2xl bg-slate-500 w-full max-w-[20rem] text-white p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card className=" h-[100vh] drop-shadow-2xl bg-slate-500 w-full max-w-[20rem] text-white p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="white">
           <div className="font-extrabold mb-14 text-center text-4xl">
@@ -51,9 +51,11 @@ function NewTrips() {
           <ListItemPrefix>
             <InboxIcon className="h-5 w-5 my-4" />
           </ListItemPrefix>
-          Inbox
+          <Link className="w-max transition-all " to={paths.AllTrips}>
+            Todas as viagens
+          </Link>
           <ListItemSuffix>
-            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+         
           </ListItemSuffix>
         </ListItem >
         <ListItem className="gap-3">
@@ -68,7 +70,7 @@ function NewTrips() {
           </ListItemPrefix>
           Settings
         </ListItem>
-        <ListItem className="mt-52 gap-3">
+        <ListItem className="mt-28 font-bold gap-3">
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5 " />
           </ListItemPrefix>

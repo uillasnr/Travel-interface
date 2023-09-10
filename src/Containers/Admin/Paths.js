@@ -2,7 +2,8 @@
 
 const paths = {
     Reservations: "/Reservas",
-    CreateTrips: "/NovasViagens"
+    CreateTrips: "/NovasViagens",
+    AllTrips:"/Trips"
 }
 
 export default paths
