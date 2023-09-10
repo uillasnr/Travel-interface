@@ -11,31 +11,27 @@ import Highlihts from "./Highlihts";
 
 function CreateTrip() {
     const [coverImage, setCoverImage] = useState(null);
-    const [imagesUrl, setImagesUrl] = useState([]); 
+    const [imageFiles, setImageFiles] = useState([null, null, null]);
     const [selectedHighlights, setSelectedHighlights] = useState([]);
- //console.log(setImageUrls)
- console.log(imagesUrl);
+
+
     const handleCoverImageChange = (imageCover) => {
         setCoverImage(imageCover);
     };
 
 
     const handleImageChange = (index, imageFile) => {
-        if (imageFile) {
-            // Create a copy of the current state
-            const updatedImagesUrl = [...imagesUrl];
-            // Replace the image file at the specific index
-            updatedImagesUrl[index] = imageFile;
-            // Update the state with the new array of image files
-            setImagesUrl(updatedImagesUrl);
-        }
+        const updatedImageFiles = [...imageFiles];
+        updatedImageFiles[index] = imageFile;
+        setImageFiles(updatedImageFiles);
+      };
+
+
+      const handleHighlightsClick = (selectedImages) => {
+        setSelectedHighlights(selectedImages);
     };
-    
-    
-    
-
-
-
+      
+   
     const schema = yup.object().shape({
         name: yup.string().required("O nome é obrigatório"),
         description: yup.string().required("A descrição é obrigatória"),
@@ -44,7 +40,7 @@ function CreateTrip() {
         location: yup.string().required("A localização é obrigatória"),
         countryCode: yup.string().required("O código do país é obrigatório"),
         pricePerDay: yup.number().required("O preço por dia é obrigatório"),
-        //highlihts: yup.string().required("Os destaques são obrigatórios"),
+       // highlihts: yup.string().required("Os destaques são obrigatórios"),
         maxGuests: yup.number().required("O número máximo de hóspedes é obrigatório"),
         recommended: yup.boolean(),
     });
@@ -55,7 +51,7 @@ function CreateTrip() {
 
     // Enviando novo produto para o back-end
     const onSubmit = async (data) => {
-        const highlihtsString = JSON.stringify(selectedHighlights);
+        const highlihts = JSON.stringify(selectedHighlights);
         try {
             const formData = new FormData();
 
@@ -66,24 +62,20 @@ function CreateTrip() {
             formData.append("location", data.location);
             formData.append("countryCode", data.countryCode);
             formData.append("pricePerDay", data.pricePerDay);
-            formData.append("highlihts", highlihtsString); 
+            formData.append("highlihts", highlihts);
             formData.append("maxGuests", data.maxGuests);
             formData.append("recommended", data.recommended);
             formData.append("coverImage", coverImage);
 
+            const imageUrls = imageFiles.map((imageFile) => {
+                if (imageFile) {
+                  formData.append("imagesUrl", imageFile);
+                  return URL.createObjectURL(imageFile);
+                }
+                return null;
+              });
           
-            // Adicione as imagens ao formData
-imagesUrl.forEach((imageFile, index) => {
-    formData.append(`imagesUrl_${index}`, imageFile);
-  
-});
-
-
-
-            
-              
-
-
+              formData.append("imagesUrl", JSON.stringify(imageUrls.filter((url) => url !== null)));
 
 
             // Enviar o formulário para a API
@@ -95,13 +87,7 @@ imagesUrl.forEach((imageFile, index) => {
 
     };
 
-    const handleHighlightsClick = (selectedImages) => {
-        setSelectedHighlights(selectedImages);
-    };
-
-
-
-
+  
 
 
     return (
@@ -311,8 +297,8 @@ imagesUrl.forEach((imageFile, index) => {
                     <div className="overflow-auto max-h-[225px] gap-3">
                         <div>
                             <Highlihts
-                                name="highlights"
-                                {...register("highlights")}
+                                name="highlihts"
+                                {...register("highlihts")}
                                 required
                                 onImageHighlihtsClick={handleHighlightsClick} />
 
