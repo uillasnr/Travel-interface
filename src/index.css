@@ -21,7 +21,11 @@
     background: linear-gradient(180deg, transparent 0%, #ff0606 50%, #fd0000 50%);
     z-index: 1;
   }
-
+  .datepicker-container {
+    position: relative;
+    z-index: 9999; /* Defina um valor alto de z-index */
+  }
+  
   
 
   .react-datepicker__day--selected{

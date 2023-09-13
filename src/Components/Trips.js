@@ -41,7 +41,7 @@ function Trips() {
                             <div className="relative h-[320px] w-[250px] cursor-pointer bg-white drop-shadow-2xl 
                                 rounded-lg transition-transform transform hover:scale-105">
 
-                                <img src={trip.coverImage} className="rounded-lg shadow-md"
+                                <img src={trip.coverImage} className="rounded-lg shadow-md w-full h-[170px]"
                                     style={{ objectFit: "cover" }} alt={trip.name} />
 
                                 <h3 className="text-gray-700 font-medium text-sm mt-2 text-center">{trip.name}</h3>
@@ -52,9 +52,12 @@ function Trips() {
                                 </div>
 
                                 <p className="text-xs border-y-2 text-center text-slate-800">
-                                    <span className="text-cyan-700 font-medium">por dia</span>
-                                    <h3 className="text-slate-800 font-bold">R$ {trip.pricePerDay.toString()}</h3>
+                                    <span className="text-cyan-700 font-medium flex flex-col items-center space-y-1">
+                                        por dia
+                                        <span className="text-slate-800 font-bold">R$ {trip.pricePerDay.toString()}</span>
+                                    </span>
                                 </p>
+
                                 <p className="text-xs font-normal text-gray-600 text-center px-2 my-1">
                                     {LimitDescription(trip.description, 100)}</p>
                             </div>
