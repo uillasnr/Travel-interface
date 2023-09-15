@@ -80,7 +80,7 @@ function CreateTrip() {
                 return null;
             });
 
-            formData.append("imagesUrl", JSON.stringify(imageUrls.filter((url) => url !== null)));
+            formData.append("imagesUrl", JSON.stringify(imageUrls));
 
 
             // Enviar o formulário para a API

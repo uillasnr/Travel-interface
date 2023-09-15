@@ -14,10 +14,9 @@ function TripsDetails() {
     const [Description, setDescription] = useState([]);
     const [pricePerDay, setPricePerDay] = useState();
     const [location, setLocation] = useState()
-    const [startDate, setStartDate] = useState(); // Defina startDate no estado
-    const [endDate, setEndDate] = useState();     // Defina endDate no estado
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
     const [maxGuests, setMaxGuests] = useState()
-   // const [totalPaid, setTotalPaid] = useState(); // Defina totalPaid no estado
     const { id } = useParams();
 
     useEffect(() => {
@@ -32,10 +31,9 @@ function TripsDetails() {
                 setDescription(data.description)
                 setPricePerDay(data.pricePerDay)
                 setLocation(data.location)
-                setStartDate(data.startDate); // Defina startDate no estado
-                setEndDate(data.endDate);     // Defina endDate no estado
+                setStartDate(data.startDate);
+                setEndDate(data.endDate);
                 setMaxGuests(data.maxGuests);
-                //setTotalPaid(data.TotalPaid)
             } catch (error) {
                 console.error("Error loading trip details:", error);
             }
@@ -46,7 +44,7 @@ function TripsDetails() {
 
     return (
         <>
-            <h1 className="text-gray-700 text-center my-3.5 text-4xl  border-b  font-black">Travel</h1>
+            <h1 className="text-cyan-700 text-center my-3.5 text-4xl pb-4 border-b  font-black">Travel</h1>
             {Header && (
                 <TripsHeader Header={Header} />
             )}
@@ -59,13 +57,18 @@ function TripsDetails() {
                 <TripDescription description={Description} />
             )}
 
-            {pricePerDay && startDate && endDate && maxGuests &&  (
-                <TripReservation  pricePerDay={pricePerDay} startDate={startDate} endDate={endDate} maxGuests={maxGuests} />
+            {pricePerDay && startDate && endDate && maxGuests && (
+                <TripReservation pricePerDay={pricePerDay} startDate={startDate} endDate={endDate} maxGuests={maxGuests} />
             )}
 
             {location && (
                 <TripLocation location={location} />
             )}
+
+            <footer className="text-center border-t-2 bg-slate-200 drop-shadow-2xl my-2">
+                <h1 className="text-cyan-700 text-center text-3xl  mt-3  font-black">Travel</h1>
+                Todos os direitos reservados © 2023
+            </footer>
 
         </>
     );
