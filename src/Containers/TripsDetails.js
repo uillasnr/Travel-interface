@@ -24,7 +24,6 @@ function TripsDetails() {
             try {
                 const response = await api.get(`Trips/${id}`);
                 const { data } = response;
-                console.log(data);
 
                 setHeader(data);
                 setHighlihts(data.highlihts);
@@ -45,31 +44,32 @@ function TripsDetails() {
     return (
         <>
             <h1 className="text-cyan-700 text-center my-3.5 text-4xl pb-4 border-b  font-black">Travel</h1>
-            {Header && (
-                <TripsHeader Header={Header} />
-            )}
+            <div className="container mx-auto mb-[160px] flex w-full flex-col items-center justify-between">
+                {Header && (
+                    <TripsHeader Header={Header} />
+                )}
+                <div className="flex w-full flex-col lg:mt-10 lg:flex-row lg:justify-between lg:gap-4 lg:pr-5">
+                    {pricePerDay && startDate && endDate && maxGuests && (
+                        <TripReservation pricePerDay={pricePerDay} startDate={startDate} endDate={endDate} maxGuests={maxGuests} />
+                    )}
+                    <div className="flex flex-col lg:w-[60%]">
+                        {Description && (
+                            <TripDescription description={Description} />
+                        )}
 
-            {Highlihts && (
-                <TripHighlights Highlights={Highlihts} />
-            )}
-
-            {Description && (
-                <TripDescription description={Description} />
-            )}
-
-            {pricePerDay && startDate && endDate && maxGuests && (
-                <TripReservation pricePerDay={pricePerDay} startDate={startDate} endDate={endDate} maxGuests={maxGuests} />
-            )}
-
-            {location && (
-                <TripLocation location={location} />
-            )}
-
+                        {Highlihts && (
+                            <TripHighlights Highlights={Highlihts} />
+                        )}
+                    </div>
+                </div>
+                {location && (
+                    <TripLocation location={location} />
+                )}
+            </div>
             <footer className="text-center border-t-2 bg-slate-200 drop-shadow-2xl my-2">
                 <h1 className="text-cyan-700 text-center text-3xl  mt-3  font-black">Travel</h1>
                 Todos os direitos reservados © 2023
             </footer>
-
         </>
     );
 }

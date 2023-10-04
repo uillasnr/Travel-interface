@@ -18,12 +18,11 @@ function CreateTrip() {
     const [selectedHighlights, setSelectedHighlights] = useState([]);
     const [countryCode, setCountryCode] = useState('');
     const history = useHistory()
-    
-    
+    console.log(imageFiles)
+
     const handleCoverImageChange = (imageCover) => {
         setCoverImage(imageCover);
     };
-
 
     const handleImageChange = (index, imageFile) => {
         const updatedImageFiles = [...imageFiles];
@@ -43,7 +42,7 @@ function CreateTrip() {
         startDate: yup.date().required("A data de início é obrigatória"),
         endDate: yup.date().required("A data de término é obrigatória"),
         location: yup.string().required("A localização é obrigatória"),
-      //  countryCode: yup.string().required("O código do país é obrigatório"),
+        //  countryCode: yup.string().required("O código do país é obrigatório"),
         pricePerDay: yup.number().required("O preço por dia é obrigatório"),
         // highlihts: yup.string().required("Os destaques são obrigatórios"),
         maxGuests: yup.number().required("O número máximo de hóspedes é obrigatório"),
@@ -57,6 +56,7 @@ function CreateTrip() {
     // Enviando novo produto para o back-end
     const onSubmit = async (data) => {
         const highlihts = JSON.stringify(selectedHighlights);
+
         try {
             const formData = new FormData();
 
@@ -72,24 +72,17 @@ function CreateTrip() {
             formData.append("recommended", data.recommended);
             formData.append("coverImage", coverImage);
 
-            const imageUrls = imageFiles.map((imageFile) => {
-                if (imageFile) {
-                    formData.append("imagesUrl", imageFile);
-                    return URL.createObjectURL(imageFile);
+            // Anexe as imagens
+            imageFiles.forEach((image, index) => {
+                if (image) {
+                    formData.append(`imagesUrl_${index}`, image);
                 }
-                return null;
             });
-
-            formData.append("imagesUrl", JSON.stringify(imageUrls));
-
-
             // Enviar o formulário para a API
             const response = await api.post("/Trips-criar", formData);
+            console.log(response.data);
+            history.push(paths.AllTrips);
 
-   
-                console.log(response.data);
-                history.push(paths.AllTrips);
-          
         } catch (error) {
             console.error("API call error:", error);
         }
@@ -99,8 +92,8 @@ function CreateTrip() {
         setCountryCode(cca2); // Atualize o valor do estado com o código do país selecionado
         // Também atualize o valor do campo countryCode do formulário com react-hook-form
         setValue("countryCode", cca2);
-      };
-    
+    };
+
 
 
     return (
@@ -178,15 +171,15 @@ function CreateTrip() {
                             Código do País:
                         </label>
                         <CountrySelector
-    type="text"
-    id="countryCode"
-    name="countryCode"
-    {...register("countryCode")}
-    countryCode={countryCode}
-    onCountrySelect={handleCountrySelect}
-    className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-cyan-700"
-    required
-/>
+                            type="text"
+                            id="countryCode"
+                            name="countryCode"
+                            {...register("countryCode")}
+                            countryCode={countryCode}
+                            onCountrySelect={handleCountrySelect}
+                            className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-cyan-700"
+                            required
+                        />
 
                         <p className="errors">{errors.countryCode?.message}</p>
                     </div>

@@ -17,7 +17,7 @@ function InputFileCover({ onImageCoverChange }) {
                 reader.onloadend = () => {
                     const base64String = reader.result;
                     setPreview(base64String);
-                    onImageCoverChange(imageCover, base64String); // Chama a função com a imagem selecionada e a base64
+                    onImageCoverChange(imageCover, base64String);
                 };
 
                 reader.readAsDataURL(imageCover);
@@ -32,10 +32,10 @@ function InputFileCover({ onImageCoverChange }) {
             className="relative w-auto h-72 mx-auto rounded-lg overflow-hidden shadow-lg"
             style={{
                 backgroundImage: `url(${preview})`,
-                backgroundSize: 'cover', 
-                backgroundRepeat: 'no-repeat', 
-                backgroundPosition: 'center', 
-              }}
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+            }}
         >
             <input
                 id="file-input-cover"

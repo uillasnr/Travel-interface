@@ -3,7 +3,7 @@ import { ImFolderUpload } from "react-icons/im";
 
 function InputFile({ index, onImageChange }) {
     const [file, setFile] = useState(null);
-    const [preview, setPreview] = useState(null);
+    const [previews, setPreviews] = useState("");
 
     const handleChange = (e) => {
         const image = e.target.files?.[0];
@@ -16,10 +16,8 @@ function InputFile({ index, onImageChange }) {
 
                 reader.onloadend = () => {
                     const base64String = reader.result;
-                    setPreview(base64String);
-
-                    // Pass the actual File object to the parent component
-                    onImageChange(index, image);
+                    setPreviews(base64String);
+                    onImageChange(index, image, base64String);
                 };
 
                 reader.readAsDataURL(image);
@@ -32,16 +30,17 @@ function InputFile({ index, onImageChange }) {
     return (
         <div className="relative w-44 h-40 mx-auto rounded-lg overflow-hidden shadow-lg">
             <input
-                id={`file-input-${index}`} // Usar um ID exclusivo para cada InputFile
+                id={`file-input-${index}`}
                 type="file"
                 accept="image/*"
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                multiple
                 onChange={handleChange}
             />
-       
-            {!preview ? (
+
+            {previews.length === 0 ? (
                 <label
-                    htmlFor={`file-input-${index}`} // Correspondente ao ID do input
+                    htmlFor={`file-input-${index}`}
                     className="absolute inset-0 w-full h-full flex flex-col justify-center items-center cursor-pointer bg-opacity-80 bg-slate-500 hover:bg-slate-600 text-white transition duration-300 ease-in-out"
                 >
                     <div className="flex flex-col gap-0 justify-center items-center">
@@ -53,7 +52,7 @@ function InputFile({ index, onImageChange }) {
                 <div
                     className="w-full h-full"
                     style={{
-                        backgroundImage: `url(${preview})`,
+                        backgroundImage: `url(${previews})`,
                         backgroundSize: "cover",
                     }}
                 />
