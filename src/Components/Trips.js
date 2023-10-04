@@ -13,7 +13,7 @@ function Trips() {
             try {
                 const response = await api.get('Trips');
                 const { data } = response;
-                console.log(data);
+              
 
                 setTrips(data);
             } catch (error) {

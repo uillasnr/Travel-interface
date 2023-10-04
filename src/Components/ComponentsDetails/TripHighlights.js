@@ -1,7 +1,7 @@
 import React from "react";
 
 function TripHighlights({ Highlights }) {
-  console.log(Highlights);
+
   return (
     <div className="container mb-10 mt-5 w-full px-5">
       <h3 className="mb-2 text-lg font-semibold text-gray-700">
