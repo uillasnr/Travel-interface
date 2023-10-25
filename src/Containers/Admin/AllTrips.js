@@ -21,11 +21,11 @@ function AllTrips() {
         loadTrips();
     }, []);
 
-    async function handleDeleteTrip(id) {
+    async function handleDeleteTrip(Id) {
         try {
-            await api.delete(`/trips/${id}`);
+            await api.delete(`/trips/${Id}`);
             // Atualize o estado local para refletir a exclusão
-            setTrips((prevTrips) => prevTrips.filter((trip) => trip.id !== id));
+            setTrips((prevTrips) => prevTrips.filter((trip) => trip.id !== Id));
         } catch (error) {
             console.error("Error deleting trip:", error);
 
