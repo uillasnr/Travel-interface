@@ -1,9 +1,9 @@
-
-
 const paths = {
-    Reservations: "/Reservas",
-    CreateTrips: "/NovasViagens",
-    AllTrips:"/Trips"
-}
+  Reservations: "/Reservas",
+  CreateTrips: "/Novas-Viagens",
+  CreateCategory: "/Novas-Categorias",
+  UpdateCategory: "/Update-category/:id",
+  AllTrips: "/Trips",
+};
 
-export default paths
+export default paths;

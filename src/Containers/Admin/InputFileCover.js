@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ImFolderUpload } from "react-icons/im";
 
-function InputFileCover({ onImageCoverChange }) {
+function InputFileCover({ onImageCoverChange, imageUrl  }) {
     const [file, setFile] = useState(null);
     const [preview, setPreview] = useState(null);
 
@@ -31,7 +31,7 @@ function InputFileCover({ onImageCoverChange }) {
         <div
             className="relative w-auto h-72 mx-auto rounded-lg overflow-hidden shadow-lg"
             style={{
-                backgroundImage: `url(${preview})`,
+                backgroundImage: `url(${preview || imageUrl})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
@@ -44,7 +44,7 @@ function InputFileCover({ onImageCoverChange }) {
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 onChange={handleChange}
             />
-            {!preview && (
+             {!preview && !imageUrl && (
                 <label
                     htmlFor="file-input-cover"
                     className="absolute inset-0 w-full h-full flex flex-col justify-center
@@ -52,7 +52,7 @@ function InputFileCover({ onImageCoverChange }) {
                       text-white transition duration-300 ease-in-out"
 
                 ><div className="flex flex-col justify-center items-center">
-                        <ImFolderUpload size={30} />
+                        <ImFolderUpload size={30}  />
                         <h3 className="font-bold text-center pt-3 ">Imagem de Capa</h3>
                         <span className="text-xs text-center p-3"> Clique para fazer upload de uma imagem</span>
                     </div>
