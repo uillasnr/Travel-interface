@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FiArrowLeftCircle } from "react-icons/fi";
 import api from "../services/api";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import formatPrice from "../hooks/formatPrice";
 
 function ListCategory() {
   const [Categories, setCategories] = useState([]);
@@ -30,6 +31,13 @@ function ListCategory() {
     }
     return description;
   };
+
+  const LimitLocation = (location, maxLength) => {
+    if (location.length > maxLength) {
+        return `${location.slice(0, maxLength)}...`;
+    }
+    return location;
+}
 
   return (
     <div>
@@ -80,7 +88,7 @@ function ListCategory() {
                           svg
                         />
                         <p className="text-xs text-gray-600">
-                          {Categories.location}
+                        {LimitLocation(Categories.location, 40)}
                         </p>
                       </div>
 
@@ -88,7 +96,7 @@ function ListCategory() {
                         <span className="text-cyan-700 font-medium flex flex-col items-center space-y-1">
                           por dia
                           <span className="text-slate-800 font-bold">
-                            R$ {Categories.pricePerDay.toString()}
+                            {formatPrice(Categories.pricePerDay)}
                           </span>
                         </span>
                       </p>

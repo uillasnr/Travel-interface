@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { Link } from "react-router-dom";
 import { FiArrowLeftCircle } from "react-icons/fi";
-import api from "../services/api";
 import { useLocation } from "react-router-dom";
+import formatPrice from "../hooks/formatPrice";
 
 function Search() {
     const location = useLocation();
@@ -23,6 +23,13 @@ function Search() {
             return `${description.slice(0, maxLength)}...`;
         }
         return description;
+    }
+
+    const LimitLocation = (location, maxLength) => {
+        if (location.length > maxLength) {
+            return `${location.slice(0, maxLength)}...`;
+        }
+        return location;
     }
 
     return (
@@ -59,13 +66,13 @@ function Search() {
 
                                             <div className="flex items-center font-normal gap-1 my-1 justify-center">
                                                 <ReactCountryFlag countryCode={trip.countryCode} svg />
-                                                <p className="text-xs text-gray-600">{trip.location}</p>
+                                                <p className="text-xs text-gray-600">{LimitLocation(trip.location, 40)}</p>
                                             </div>
 
                                             <p className="text-xs border-y-2 text-center text-slate-800">
                                                 <span className="text-cyan-700 font-medium flex flex-col items-center space-y-1">
                                                     por dia
-                                                    <span className="text-slate-800 font-bold">R$ {trip.pricePerDay.toString()}</span>
+                                                    <span className="text-slate-800 font-bold">{formatPrice(trip.pricePerDay)}</span>
                                                 </span>
                                             </p>
 
