@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import api from "../../../services/api";
 import InputFileCover from "../InputFileCover";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import ListCategories from "./ListCategory";
 
 function CreateCategory() {
@@ -44,49 +43,50 @@ function CreateCategory() {
 
   return (
     <div className="w-full">
-       <ListCategories />
+      <ListCategories />
       <h3 className="text-center text-gray-700 text-2xl mt-8 font-bold">
         Criar uma Categoria
       </h3>
 
-      <div className="relative  mt-5 w-[500px] h-[500px] mx-auto bg-gray-300 rounded-lg overflow-hidden shadow-lg">
-
-
-        <form className="p-5 " onSubmit={handleSubmit(onSubmit)}>
-        <div className="">
+      <div className="relative  mt-5 w-[700px] h-[330px] mx-auto bg-gray-300 rounded-lg overflow-hidden shadow-lg">
+        <form className="p-5 flex gap-7 " onSubmit={handleSubmit(onSubmit)}>
+          <div className="w-96">
             <InputFileCover
               onImageCoverChange={handleCategoryImageChange}
               /*  {...register("image")} */
             />
             <p className="errors">{errors.image && errors.image.message}</p>
           </div>
-          <div className="mb-4 ">
-            <label
-              htmlFor="categoryName"
-              className="block text-center mb-2 text-sm font-semibold text-gray-700"
+
+          <div className=" flex flex-col w-60">
+            <div className="mt-16 ">
+              <label
+                htmlFor="categoryName"
+                className="block text-center  text-sm font-semibold text-gray-700"
+              >
+                Nome da Categoria
+              </label>
+              <input
+                type="text"
+                id="categoryName"
+                name="categoryName"
+                className="w-full border mt-4 border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+                required
+                {...register("name")}
+              />
+              <p className="errors">{errors.name && errors.name.message}</p>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-cyan-700 hover:bg-cyan-600 text-white py-2 h-10 rounded-lg mt-5"
             >
-              Nome da Categoria
-            </label>
-            <input
-              type="text"
-              id="categoryName"
-              name="categoryName"
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
-              required
-              {...register("name")}
-            />
-            <p className="errors">{errors.name && errors.name.message}</p>
+              Criar Categoria
+            </button>
           </div>
-          
-          <button
-            type="submit"
-            className="w-full bg-cyan-700 hover:bg-cyan-600 text-white py-2 h-10 rounded-lg mt-5"
-          >
-            Criar Categoria
-          </button>
         </form>
       </div>
-      
+
       {showConfirmationModal && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -106,7 +106,6 @@ function CreateCategory() {
           </div>
         </div>
       )}
-   
     </div>
   );
 }

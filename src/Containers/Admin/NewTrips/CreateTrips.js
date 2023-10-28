@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import InputFileCover from "./InputFileCover";
-import InputFile from "./InputFile";
+import InputFileCover from "../InputFileCover";
+import InputFile from "../InputFile";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../services/api";
-import Highlihts from "./Highlihts";
+import api from "../../../services/api";
+import Highlihts from "../Highlihts";
 import { useHistory } from "react-router-dom";
-import paths from "./Paths";
-import CountrySelector from "./CountrySelector";
-import SelectCategories from "./SelectCategories";
+import paths from "../Paths";
+import CountrySelector from "../CountrySelector";
+import SelectCategories from "../SelectCategories";
 
 function CreateTrip() {
   const [coverImage, setCoverImage] = useState(null);
@@ -18,7 +18,6 @@ function CreateTrip() {
   const [countryCode, setCountryCode] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const history = useHistory();
-  console.log(imageFiles);
 
   const handleCoverImageChange = (imageCover) => {
     setCoverImage(imageCover);
@@ -242,8 +241,8 @@ function CreateTrip() {
             </div>
           </div>
 
-          <div className="">
-            <div className="mb-4">
+          <div className="mb-4 flex gap-4 ">
+            <div className="mb-4 w-2/3">
               <label
                 htmlFor="recommended"
                 className="block text-gray-800 font-semibold mb-2"
@@ -255,7 +254,7 @@ function CreateTrip() {
                 id="recommended"
                 name="recommended"
                 {...register("recommended")}
-                className="  text-blue-500"
+                className=" h-5 text-blue-500 w-5 ml-10 justify-center flex border-gray-300 "
               />
               <p className="errors">{errors.recommended?.message}</p>
             </div>
@@ -283,7 +282,7 @@ function CreateTrip() {
           <div className="mt-6">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              className="w-full bg-cyan-700 hover:bg-cyan-600 text-white py-2 h-10 rounded-lg mt-5"
             >
               Criar Viagem
             </button>
@@ -291,7 +290,7 @@ function CreateTrip() {
         </form>
       </div>
 
-      <div className="w-1/2 pl-4 mt-[-85px]">
+      <div className="w-1/2 pl-4 mt-[-130px]">
         <InputFileCover onImageCoverChange={handleCoverImageChange} />
 
         <div className="flex gap-3 mt-3">

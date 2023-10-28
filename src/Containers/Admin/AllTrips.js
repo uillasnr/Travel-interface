@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
+import formatPrice from "../../hooks/formatPrice";
 
 function AllTrips() {
     const [Trips, setTrips] = useState([]);
@@ -41,12 +42,15 @@ function AllTrips() {
 
     return (
         <div className="w-full mx-5 py-5">
+             <h3 className="text-center text-gray-700 text-2xl mt-2 mb-2 font-bold">
+             Todas as viagens
+            </h3>
             {Trips &&
                 Trips.map((trip) => (
                     <div className="w-full" key={trip.id}>
                         <Link to={`/detalhes/${trip.id}`} style={{ textDecoration: 'none' }}>
                             <div className="relative h-full flex cursor-pointer bg-white gap-3 m-4 drop-shadow-2xl rounded-lg transition-transform transform hover:scale-105">
-                                <img src={trip.coverImage} className="rounded-lg shadow-md m-4 h-full w-[250px]" style={{ objectFit: "cover" }} alt={trip.name} />
+                                <img src={trip.coverImage} className="rounded-lg shadow-md m-4 h-40 w-[250px]" style={{ objectFit: "cover" }} alt={trip.name} />
 
                                 <div className="m-2">
                                     <h3 className="text-gray-700 font-medium text-sm mt-2 text-center">{trip.name}</h3>
@@ -63,7 +67,7 @@ function AllTrips() {
                                 </div>
                                 <p className="text-base pl-52 mt-20 text-center text-slate-800">
                                     <span className="text-cyan-700 font-medium">por dia</span>
-                                    <h3 className="text-slate-800 font-bold">R$ {trip.pricePerDay.toString()}</h3>
+                                    <h3 className="text-slate-800 font-bold">{formatPrice(trip.pricePerDay)}</h3>
                                 </p>
 
                                 <button

@@ -21,8 +21,11 @@ function Reservations() {
     }, []);
 
     return (
-        
-        <Card className="h-full w-full m-6 mt-16">
+        <div className="h-full w-full m-6 ">
+             <h3 className="text-center text-gray-700 text-2xl  mb-7 font-bold">
+             Reservas das Viagens
+            </h3>
+        <Card >
             <table className="w-full min-w-max table-auto text-left">
                 <thead>
                     <tr>
@@ -100,6 +103,7 @@ function Reservations() {
                 </tbody>
             </table>
         </Card>
+        </div>
     );
 }
 

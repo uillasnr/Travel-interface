@@ -30,7 +30,7 @@ function SelectCategories({ onCategoryChange }) {
         htmlFor="Categorias"
         className="block text-gray-800 font-semibold mb-2"
       >
-        Categorias
+        Categorias:
       </label>
       <select
         id="categories"
