@@ -5,7 +5,7 @@ function TripHighlights({ Highlights }) {
   return (
     <div className="container mb-10 mt-5 w-full px-5">
       <h3 className="mb-2 text-lg font-semibold text-gray-700">
-        Destaques
+      O que esse lugar oferece
       </h3>
       <ul className="grid grid-flow-row-dense grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:max-w-4xl gap-4 text-slate-600 font-medium text-sm justify-center items-center">
         {Highlights.map((Highlight, index) => (

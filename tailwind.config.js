@@ -15,7 +15,7 @@ module.exports = {
     primaryDarker: "#312A4F",
     grayPrimary: "#717171",
     grayLighter: "#BBBFBF",
-    white: "#F5F5F5", // Corrected color name
+    white: "#F5F5F5", 
   },
   textColor: {
     dark: "#717171"
@@ -31,15 +31,6 @@ module.exports = {
     }),
   ],
 };
-
-                                                                             //text-slate-800
-//cores de texto                                                             text-gray-600
-//H3 nome no card======= text-gray-700                                       text-gray-700
-//p location text-gray-600                                                    text-cyan-700 cores
-//P tamaunho da fonte text-xs 12rem
-/// <span className="text-gray-700 font-medium"
-/// <h3 className="text-slate-800 font-bold"
-//<p className="text-xs font-normal text-gray-600 text-center px-2 my-1
 
 
 

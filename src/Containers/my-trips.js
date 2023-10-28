@@ -41,6 +41,13 @@ function MyTrips() {
         }
     };
 
+    const LimitLocation = (location, maxLength) => {
+        if (location.length > maxLength) {
+            return `${location.slice(0, maxLength)}...`;
+        }
+        return location;
+    }
+
 
     return (
         <div className="p-8">
@@ -77,7 +84,7 @@ function MyTrips() {
                                                 svg
                                             />
                                             <p className="text-xs font-medium text-grayPrimary underline">
-                                                {Trip.trip.location}
+                                            {LimitLocation(Trip.location, 40)}
                                             </p>
                                         </div>
                                     </div>

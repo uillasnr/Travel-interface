@@ -7,7 +7,8 @@ import Modal from "react-modal";
 import Register from "./Register";
 import { useUser } from "../hooks/UserContext";
 import Button from "../Components/Button";
-
+import { useHistory } from "react-router-dom";
+import paths from "./Admin/Paths";
 
 const customStyles = {
     overlay: {
@@ -23,7 +24,7 @@ const customStyles = {
         borderRadius: "8px",
         boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
         maxWidth: "400px",
-        width: "90%", 
+        width: "90%",
         padding: "20px",
         background: "white",
     },
@@ -33,7 +34,7 @@ function Login({ isOpen, onRequestClose, errorMessage }) {
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
     const { login } = useUser()
     const [error, setError] = useState("");
-
+    const history = useHistory()
 
     const schema = yup.object().shape({
         email: yup.string().email('Digite um e-mail válido')
@@ -50,21 +51,25 @@ function Login({ isOpen, onRequestClose, errorMessage }) {
         resolver: yupResolver(schema)
     })
 
-    const onSubmit = async clientData => {
+    const onSubmit = async (clientData) => {
         try {
-            const { data } = await api.post("login", {
-                email: clientData.email,
-                password: clientData.password
-            });
-            console.log(data);
-            login(data);
-
-
+          const { data } = await api.post("login", {
+            email: clientData.email,
+            password: clientData.password,
+            
+          });
+          login(data);
+         
+          if (data.user.admin) {
+            history.push(paths.Reservations); 
+         
+          } else {
+            history.push("/");
+          }
         } catch (error) {
-           
-            setError("Usuário não encontrado");
+          setError("Usuário não encontrado");
         }
-    }
+      };
 
     const openRegisterModal = () => {
         setIsRegisterModalOpen(true);
@@ -124,9 +129,9 @@ function Login({ isOpen, onRequestClose, errorMessage }) {
                     <p className="errors">{errors.password?.message}</p>
 
                 </div>
-                <Button 
+                <Button
                     type="submit"
-                   /*  className="w-full bg-cyan-700 text-white py-2 rounded-lg hover:bg-cyan-700"  */
+                /*  className="w-full bg-cyan-700 text-white py-2 rounded-lg hover:bg-cyan-700"  */
                 >
                     Entrar
                 </Button>
