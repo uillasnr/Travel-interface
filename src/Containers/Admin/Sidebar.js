@@ -27,7 +27,7 @@ function NewTrips() {
     logout();
   };
   return (
-    <Card className=" h-[100vh] drop-shadow-2xl bg-slate-500 w-full max-w-[20rem] text-white p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card className=" h-[100vh] drop-shadow-2xl bg-slate-700 w-full max-w-[20rem] text-white p-4 shadow-xl shadow-blue-gray-900/5">
       <div className="mb-2 p-4">
         <Typography variant="h5" color="white">
           <div className="font-extrabold mb-14 text-center text-4xl">

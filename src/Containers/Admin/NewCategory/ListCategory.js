@@ -27,8 +27,8 @@ function ListCategories() {
       <h3 className="text-center text-gray-700 text-2xl mt-5 mb-5 font-bold">
         Todas as categorias
       </h3>
-      <div className=" m-2 bg-gray-300 rounded-lg overflow-hidden shadow-lg">
-        <ScrollContainer className="flex gap-2 p-3 scroll-container sm:p-4 sm:gap-4 md:gap-6">
+      <div className="ml-6 m-2 bg-gray-300 rounded-lg overflow-hidden shadow-lg w-[1065px]">
+        <ScrollContainer className="flex gap-2  justify-center sm:p-4 sm:gap-4 md:gap-6">
           {categories.map((category, index) => (
             <Link
               to={`/Update-category/${category.id}`}
@@ -37,8 +37,8 @@ function ListCategories() {
             >
               <div
                 className="relative w-[90px] h-[90px] transition-transform transform hover:scale-105 rounded-lg
-                  sm:w-[150px] sm:h-[150px]  md:w-[180px] lg:w-[220px] xl:w-[250px]  xl:h-[220px] bg-opacity-80 bg-slate-500 hover:bg-slate-600
-                  text-white"
+                  sm:w-[150px] sm:h-[150px]  md:w-[180px] lg:w-[220px] xl:w-[240px]  xl:h-[220px] bg-opacity-80
+                   bg-slate-500 hover:bg-slate-600 text-white"
               >
                 <img
                   className="rounded-lg object-cover w-[80px] h-[90px]  sm:w-[150px] sm:h-[150px] md:w-[180px] lg:w-[220px] xl:w-[250px]"
