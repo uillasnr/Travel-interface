@@ -9,21 +9,26 @@
   box-sizing: border-box;
 }
 
+/* Para navegadores que não suportam a propriedade scrollbar-color */
+body::-webkit-scrollbar {
+  width: 10px; /* Largura do scrollbar */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #0e7490;
+}
+
 .errors {
   color: red;
   font-size: 12px;
   padding-left: 10px;
 }
 
-
 .offers {
   position: relative;
   background: linear-gradient(180deg, transparent 0%, #ff0606 50%, #fd0000 50%);
   z-index: 1;
 }
-
-
-
 
 .datepicker-container {
   position: relative;
