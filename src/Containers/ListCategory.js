@@ -34,10 +34,10 @@ function ListCategory() {
 
   const LimitLocation = (location, maxLength) => {
     if (location.length > maxLength) {
-        return `${location.slice(0, maxLength)}...`;
+      return `${location.slice(0, maxLength)}...`;
     }
     return location;
-}
+  };
 
   return (
     <div>
@@ -88,7 +88,7 @@ function ListCategory() {
                           svg
                         />
                         <p className="text-xs text-gray-600">
-                        {LimitLocation(Categories.location, 40)}
+                          {LimitLocation(Categories.location, 35)}
                         </p>
                       </div>
 

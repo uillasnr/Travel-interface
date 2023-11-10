@@ -69,7 +69,7 @@ function Confirmation({ isOpen, onRequestClose }) {
       });
   
       const { data } = response;
-  console.log(data);
+  console.log("enviar para o strip",data);
       // Crie uma sessão de pagamento no Stripe
       const { error } = await stripe.redirectToCheckout({
         sessionId: data.session, // ID da sessão do Stripe retornado pelo seu backend
