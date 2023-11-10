@@ -42,11 +42,12 @@ function MyTrips() {
     };
 
     const LimitLocation = (location, maxLength) => {
-        if (location.length > maxLength) {
+        if (location && location.length > maxLength) {
             return `${location.slice(0, maxLength)}...`;
         }
         return location;
     }
+    
 
 
     return (

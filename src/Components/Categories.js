@@ -11,7 +11,7 @@ function Categories() {
       try {
         const response = await api.get("/category");
         const { data } = response;
-        console.log(data);
+       
         setCategories(data);
       } catch (error) {
         console.error("Error loading categories:", error);
