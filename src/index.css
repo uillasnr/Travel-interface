@@ -58,14 +58,6 @@ body::-webkit-scrollbar-thumb {
   @apply bg-gray-50 cursor-not-allowed
 }
 
-.swiper-button-next:after, .swiper-button-prev:after {
-  color: #000;
-  font-size: 22px !important;
-  font-weight: bold;
-  position: absolute;
-
-}
-
 .react-datepicker__header {
   @apply bg-cyan-200
 }
@@ -73,21 +65,33 @@ body::-webkit-scrollbar-thumb {
 
 
 
+.swiper-button-next:after, .swiper-button-prev:after {
+  color: #000;
+  font-size: 22px !important;
+  font-weight: bold;
+  position: absolute;
 
+}
 .swiper-button-prev:after {
-  left: calc(32%)
+  left: calc(32%);
 }
 
 .swiper-button-next:after {
   left: calc(42%);
 }
 
-.swiper-button-next,
+.swiper-button-next{
+  width: 42px !important;
+  height: 42px !important;
+  background: rgba(255, 255, 255, 0.70);
+  border-radius: 50%;
+}
 .swiper-button-prev {
   width: 42px !important;
   height: 42px !important;
   background: rgba(255, 255, 255, 0.70);
   border-radius: 50%;
+  
 }
 
 .swiper-pagination.swiper-pagination-bullets.swiper-pagination-horizontal {

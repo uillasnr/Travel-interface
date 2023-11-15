@@ -104,7 +104,7 @@ function CreateTrip() {
   return (
     <div className="bg-gray-200 min-h-screen w-full flex items-center justify-center">
       <div className="mt-5  bg-opacity-80 bg-slate-500 p-6 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Criar uma nova viagem
         </h1>
 

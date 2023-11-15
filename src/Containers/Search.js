@@ -66,7 +66,7 @@ function Search() {
 
                                             <div className="flex items-center font-normal gap-1 my-1 justify-center">
                                                 <ReactCountryFlag countryCode={trip.countryCode} svg />
-                                                <p className="text-xs text-gray-600">{LimitLocation(trip.location, 40)}</p>
+                                                <p className="text-xs text-gray-600">{LimitLocation(trip.location, 35)}</p>
                                             </div>
 
                                             <p className="text-xs border-y-2 text-center text-slate-800">
