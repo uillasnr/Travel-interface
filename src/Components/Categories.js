@@ -41,7 +41,7 @@ function Categories() {
               src={category.coverImage}
               alt={category.name}
             />
-            <p className="absolute inset-0 flex items-center justify-center text-white text-xl sm:text-2xl font-bold rounded-lg">
+            <p className="absolute inset-0 flex items-center justify-center text-white text-sm sm:text-2xl font-bold rounded-lg">
               {category.name}
             </p>
           </div>

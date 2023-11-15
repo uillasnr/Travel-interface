@@ -74,7 +74,7 @@ function NewTrips() {
           <ListItemPrefix>
             <Cog6ToothIcon className="h-5 w-5 my-4" />
           </ListItemPrefix>
-          Settings
+          Configurações
         </ListItem>
         <ListItem className="mt-28 font-bold gap-3" onClick={handleLogout}>
           <ListItemPrefix>

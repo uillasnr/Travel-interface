@@ -28,7 +28,7 @@ function InputFile({ index, onImageChange }) {
     };
 
     return (
-        <div className="relative w-44 h-40 mx-auto rounded-lg overflow-hidden shadow-lg">
+        <div className="relative w-44 h-32 mx-auto rounded-lg overflow-hidden shadow-lg">
             <input
                 id={`file-input-${index}`}
                 type="file"
@@ -41,7 +41,9 @@ function InputFile({ index, onImageChange }) {
             {previews.length === 0 ? (
                 <label
                     htmlFor={`file-input-${index}`}
-                    className="absolute inset-0 w-full h-full flex flex-col justify-center items-center cursor-pointer bg-opacity-80 bg-slate-500 hover:bg-slate-600 text-white transition duration-300 ease-in-out"
+                    className="absolute inset-0 w-full h-32 flex flex-col
+                     justify-center items-center cursor-pointer bg-opacity-80
+                      bg-slate-500 hover:bg-slate-600 text-white transition duration-300 ease-in-out"
                 >
                     <div className="flex flex-col gap-0 justify-center items-center">
                         <ImFolderUpload size={30} />

@@ -43,7 +43,7 @@ const CountrySelector = ({ countryCode, onCountrySelect }) => {
                     placeholder=""
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-cyan-700"
+                    className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
                 />
                 {selectedCountry && (
                     <div className="absolute top-0 left-0 flex items-center h-full p-2">
