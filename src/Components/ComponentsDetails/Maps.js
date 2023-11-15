@@ -46,7 +46,7 @@ function MyComponent({ location }) {
     }, [location]);
 
     return (
-        <div className="flex h-[460px] w-full flex-col">
+        <div className="flex h-[700px] w-full flex-col">
             {center && (
                 <LoadScript googleMapsApiKey={googleMapsApiKey} >
                     <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
