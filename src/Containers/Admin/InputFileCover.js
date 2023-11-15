@@ -29,7 +29,7 @@ function InputFileCover({ onImageCoverChange, imageUrl  }) {
 
     return (
         <div
-            className="relative w-auto h-72 mx-auto rounded-lg overflow-hidden shadow-lg"
+            className="relative w-auto h-[265px] mx-auto rounded-lg overflow-hidden shadow-lg"
             style={{
                 backgroundImage: `url(${preview || imageUrl})`,
                 backgroundSize: 'cover',

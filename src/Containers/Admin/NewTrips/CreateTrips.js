@@ -39,9 +39,9 @@ function CreateTrip() {
     startDate: yup.date().required("A data de início é obrigatória"),
     endDate: yup.date().required("A data de término é obrigatória"),
     location: yup.string().required("A localização é obrigatória"),
-    //  countryCode: yup.string().required("O código do país é obrigatório"),
+    //countryCode: yup.string().required("O código do país é obrigatório"),
     pricePerDay: yup.number().required("O preço por dia é obrigatório"),
-    // highlihts: yup.string().required("Os destaques são obrigatórios"),
+    //highlihts: yup.string().required("Os destaques são obrigatórios"),
     maxGuests: yup
       .number()
       .required("O número máximo de hóspedes é obrigatório"),
@@ -103,13 +103,13 @@ function CreateTrip() {
 
   return (
     <div className="bg-gray-200 min-h-screen w-full flex items-center justify-center">
-      <div className="mt-5  bg-opacity-80 bg-slate-500 p-6 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+      <div className="mt-2  bg-opacity-80 bg-slate-500 p-6 py-3 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">
           Criar uma nova viagem
         </h1>
 
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div className="mb-2">
             <label
               htmlFor="name"
               className="block text-gray-800 font-semibold mb-2"
@@ -121,7 +121,8 @@ function CreateTrip() {
               id="name"
               name="name"
               {...register("name")}
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800
+               placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
               required
             />
             <p className="errors">{errors.name?.message}</p>
@@ -140,7 +141,8 @@ function CreateTrip() {
                 id="startDate"
                 name="startDate"
                 {...register("startDate")}
-                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800
+                 placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
                 required
               />
               <p className="errors">{errors.startDate?.message}</p>
@@ -157,7 +159,8 @@ function CreateTrip() {
                 id="endDate"
                 name="endDate"
                 {...register("endDate")}
-                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800
+                 placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
                 required
               />
               <p className="errors">{errors.endDate?.message}</p>
@@ -176,7 +179,8 @@ function CreateTrip() {
               id="location"
               name="location"
               {...register("location")}
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800
+               placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
               required
             />
             <p className="errors">{errors.location?.message}</p>
@@ -196,7 +200,8 @@ function CreateTrip() {
               {...register("countryCode")}
               countryCode={countryCode}
               onCountrySelect={handleCountrySelect}
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-cyan-700"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800
+               placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
               required
             />
 
@@ -216,7 +221,8 @@ function CreateTrip() {
                 id="pricePerDay"
                 name="pricePerDay"
                 {...register("pricePerDay")}
-                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800
+                 placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
                 required
               />
               <p className="errors">{errors.pricePerDay?.message}</p>
@@ -234,14 +240,15 @@ function CreateTrip() {
                 id="maxGuests"
                 name="maxGuests"
                 {...register("maxGuests")}
-                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+                className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800
+                 placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
                 required
               />
               <p className="errors">{errors.maxGuests?.message}</p>
             </div>
           </div>
 
-          <div className="mb-4 flex gap-4 ">
+          <div className=" flex gap-4 ">
             <div className="mb-4 w-2/3">
               <label
                 htmlFor="recommended"
@@ -262,7 +269,7 @@ function CreateTrip() {
             <SelectCategories onCategoryChange={handleCategoryChange} />
           </div>
 
-          <div className="mb-4">
+          <div className="mb-0">
             <label
               htmlFor="description"
               className="block text-gray-800 font-semibold mb-2"
@@ -273,24 +280,17 @@ function CreateTrip() {
               id="description"
               name="description"
               {...register("description")}
-              className="w-full border border-gray-300 rounded-lg py-2 px-3 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+              className="w-full border border-gray-300 rounded-lg py-2 px-3
+               text-gray-800 placeholder-gray-400 focus:outline-none focus:cyan focus:border-cyan-700"
               rows="4"
               required
             />
             <p className="errors">{errors.description?.message}</p>
           </div>
-          <div className="mt-6">
-            <button
-              type="submit"
-              className="w-full bg-cyan-700 hover:bg-cyan-600 text-white py-2 h-10 rounded-lg mt-5"
-            >
-              Criar Viagem
-            </button>
-          </div>
         </form>
       </div>
 
-      <div className="w-1/2 pl-4 mt-[-130px]">
+      <div className="w-1/2 pl-4 mt-[5px]">
         <InputFileCover onImageCoverChange={handleCoverImageChange} />
 
         <div className="flex gap-3 mt-3">
@@ -320,6 +320,17 @@ function CreateTrip() {
             </div>
           </div>
         </div>
+
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-3">
+            <button
+              type="submit"
+              className="w-full bg-cyan-700 hover:bg-cyan-600 text-white py-2 h-10 rounded-lg "
+            >
+              Criar Viagem
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
