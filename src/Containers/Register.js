@@ -42,7 +42,8 @@ function Register({ isOpen, onRequestClose, onRegisterSuccess }) {
       .min(6, "A senha deve ter pelo menos 6 dígitos"),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password"), null], "As senhas devem coincidir"),
+      .required("A senha é obrigatória")
+      .oneOf([yup.ref("confirmPassword"), null], "As senhas devem coincidir"),
   });
 
   const {
