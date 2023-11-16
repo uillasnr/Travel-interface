@@ -52,4 +52,4 @@ Execute npm install no diretório do projeto para instalar todas as dependência
 2. Iniciar o Aplicativo:
 Execute npm start para iniciar o aplicativo em modo de desenvolvimento. Abra http://localhost:3000 no navegador.
 
-[![Vídeo Demonstrativo](https://img.youtube.com/vi/SEU-ID-YOUTUBE/0.jpg)](https://clipchamp.com/watch/hIfE219eZbt)
+### [![Vídeo Demonstrativo](https://img.youtube.com/vi/SEU-ID-YOUTUBE/0.jpg)](https://clipchamp.com/watch/hIfE219eZbt)
